@@ -1,0 +1,17 @@
+#!/bin/env bash
+#This script displays the content of the file /etc/passwd
+
+if [ -e /etc/passwd ]; then
+    IFS=":"
+
+    while read -r username _ uid _ home _; do
+        echo "Username: $username"
+        echo "User ID: $uid"
+        echo "Home Directory: $home"
+    done < /etc/passwd
+
+    unset IFS
+else
+    echo "The /etc/passwd file does not exist."
+fi
+
