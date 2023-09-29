@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script kills the process 7-highlander.
+
+name="7-highlander"
+pid=$(pgrep -f "$name")
+
+if [ -n "$pid" ]; then
+  kill -TERM "$pid"
+  echo "Killed process $name (PID: $pid)."
+else
+  echo "Process $name is not running."
+fi
