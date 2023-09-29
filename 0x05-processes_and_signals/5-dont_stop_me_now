@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#Script that stops 4-to_infinity_and_beyond process.
+
+process_name="4-to_infinity_and_beyond"
+
+if pgrep -x "$process_name" >/dev/null
+then
+    pkill -x "$process_name"
+    echo "Stopped $process_name"
+else
+    echo "$process_name is not running"
+fi
+
