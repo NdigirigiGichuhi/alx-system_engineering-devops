@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#This script displays lines comtaining the bash word
+# shellcheck disable=SC2009
+
+ps aux | awk '/[b]ash/'
