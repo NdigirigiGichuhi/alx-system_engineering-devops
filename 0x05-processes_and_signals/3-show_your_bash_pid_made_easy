@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script displays the PID, along with the process name
+
+for pidfile in /proc/[0-9]*/cmdline
+do
+    if [[ -f "$pidfile" ]]
+    then
+        cmdline=$(tr -d '\0' < "$pidfile") # Read the command line for the process
+        if [[ "$cmdline" == *bash* ]]
+	then
+            pid=$(basename "$(dirname "$pidfile")")
+            echo "$pid $cmdline"
+        fi
+    fi
+done
+
