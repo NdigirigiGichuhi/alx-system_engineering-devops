@@ -4,7 +4,8 @@
 name="7-highlander"
 pid=$(pgrep -f "$name")
 
-if [ -n "$pid" ]; then
+if [ -n "$pid" ]
+then
   kill -TERM "$pid"
   echo "Killed process $name (PID: $pid)."
 else
