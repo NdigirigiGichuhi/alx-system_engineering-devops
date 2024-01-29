@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-#This script is about TCP and UDP ports
-sudo netstat -tunpl

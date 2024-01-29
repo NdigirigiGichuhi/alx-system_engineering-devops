@@ -1,2 +1,2 @@
-Project: Networking basics #0
+Project: Networking Basics
 Author: Ndigirigi Gichuhi
