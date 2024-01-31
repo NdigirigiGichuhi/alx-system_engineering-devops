@@ -18,6 +18,10 @@
 
 Include /etc/ssh/ssh_config.d/*.conf
 
+Host 100.26.53.215
+	IdentifyFile ~/.ssh/school
+	PasswordAuthentication no
+
 Host *
 #   ForwardAgent no
 #   ForwardX11 no
@@ -33,7 +37,6 @@ Host *
 #   AddressFamily any
 #   ConnectTimeout 0
 #   StrictHostKeyChecking ask
-#   IdentifyFile ~/.ssh/school
 #   IdentityFile ~/.ssh/id_rsa
 #   IdentityFile ~/.ssh/id_dsa
 #   IdentityFile ~/.ssh/id_ecdsa
