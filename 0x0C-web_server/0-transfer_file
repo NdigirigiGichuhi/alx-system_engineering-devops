@@ -12,4 +12,4 @@ IP=$2
 username=$3
 key_path=$4
 
-scp $path $username@$IP:$key_path
+scp -o StrictHostKEyChecking=no -i $key_path $path $username@$IP:~/
