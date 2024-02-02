@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Installing Nginx on my server
 
-pt-get -y update
+apt-get -y update
 apt-get -y install nginx
 ufw allow 'Ngnix HTTP'
 service nginx restart
