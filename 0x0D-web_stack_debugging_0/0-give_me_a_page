@@ -3,4 +3,5 @@
 # see that curling port 80 return a page that contains
 # Hello Holberton. Paste the command(s) you used to fix 
 #the issue in your answer file.
-service apache2 restart
+sudo apt install apache2
+sudo service apache2 restart
