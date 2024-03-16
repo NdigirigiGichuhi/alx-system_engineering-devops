@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # set up load balancer
 balancer_config="\
-frontend haproxy_balancer
+frontend my_frontend
     bind *:80
     mode http
-    default_backend webservers
+    default_backend my_backend
 
-backend webservers
+backend my_backend
     balance roundrobin
-    server 324857-web-01 18.215.160.180:80 check
-    server 324857-web-02 3.95.32.201:80 check
+    server 03-web-01 100.25.31.28:80 check
+    server 03-web-02 52.91.160.185:80 check
 "
 # Update packages
 sudo apt-get -y update
