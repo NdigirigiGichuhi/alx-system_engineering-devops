@@ -1,32 +1,10 @@
 #!/usr/bin/env bash
-# Configuring nginx server to have a custom 404 page
-# containing the string
+# script that doubles the number of webservers and adds new configs
 
-sudo apt-get update
-sudo apt-get install -y nginx
+# install nginx
+apt-get  update ; apt-get -y install nginx
 
-# Configure Firewall to allow request via port80
-sudo ufw allow "Nginx HTTP"
-
-# Setting the default Index page
-echo "Hello World!" | sudo tee /var/www/html/index.html
-
-# Define and apply the redirect configuration (301 Redirection)
-replacement_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com permanent;"
-sudo sed -i "s/server_name _;/$replacement_string/"  /etc/nginx/sites-enabled/default
-
-# Create a custom webpage for 404 error
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-replace_with_this="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-
-sudo sed -i "s/listen 80 default_server;/$replace_with_this/" /etc/nginx/sites-enabled/default
-
-
-# Adding Custom Header
-sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
-
-# confirming correct syntax
-sudo nginx -t
-
-#Restart nginx after implementing changes
+string="http {\n\tadd_header X-Served-By \"$HOSTNAME\";"
+sudo sed -i "s/http {/$string/" /etc/nginx/nginx.conf
+# restart nginx
 sudo service nginx restart
