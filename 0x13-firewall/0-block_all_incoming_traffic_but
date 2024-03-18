@@ -1,0 +1,4 @@
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install ufw -y
+sudo ufw allow ssh, 443, 80/tcp
