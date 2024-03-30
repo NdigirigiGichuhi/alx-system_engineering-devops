@@ -32,6 +32,5 @@ for task in tasks:
 
 print(f'Employee {name} is done with tasks {complete}/{all_todos}:')
 
-for task in tasks:
-    if task.get('completed'):
-        print(task['title'])
+for task in completed_tasks:
+        print(f'\t {task.get("title")}')
