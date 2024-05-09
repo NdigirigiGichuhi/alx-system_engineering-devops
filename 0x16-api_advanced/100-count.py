@@ -9,32 +9,30 @@ def count_words(subreddit, word_list, counts=None):
     """ecursive function that queries the Reddit API,
     parses the title of all hot articles, and prints a
     sorted count of given keywords"""
-    headers = {'User-agent': 'test45'}
-    posts_request = requests.get('http://www.reddit.com/r/{}/hot.json?after={}'
-                                 .format(subreddit, after), headers=headers)
-    if after is None:
-        word_list = [word.lower() for word in word_list]
+    if counts is None:
+        counts = {}
 
-    if posts_request.status_code == 200:
-        posts_data = posts_request.json()['data']
-        next_page = posts_data['after']
-        posts_data = posts_data['children']
-        for post in posts_data:
-            post_title = post['data']['title'].lower()
-            for word in post_title.split(' '):
-                if word in word_list:
-                    found_list.append(word)
-        if next_page is not None:
-            count_words(subreddit, word_list, found_list, next_page)
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
+    headers = {'User-Agent': 'MyBot/0.0.1'}  # Setting a custom User-Agent to avoid errors
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
+    if response.status_code == 200:
+        data = response.json()
+        posts = data['data']['children']
+        for post in posts:
+            title = post['data']['title'].lower()
+            for word in word_list:
+                if word.lower() in title:
+                    if word.lower() in counts:
+                        counts[word.lower()] += 1
+                    else:
+                        counts[word.lower()] = 1
+        if data['data']['after'] is not None:
+            count_words(subreddit, word_list, counts)
         else:
-            result = {}
-            for word in found_list:
-                if word.lower() in result.keys():
-                    result[word.lower()] += 1
-                else:
-                    result[word.lower()] = 1
-            for key, value in sorted(result.items(), key=lambda item: item[1],
-                                     reverse=True):
-                print('{}: {}'.format(key, value))
+            sorted_counts = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
+            for word, count in sorted_counts:
+                print(f"{word}: {count}")
     else:
-        return
+        print(None)
+
