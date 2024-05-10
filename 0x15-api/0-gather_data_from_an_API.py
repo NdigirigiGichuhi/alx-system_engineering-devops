@@ -1,37 +1,28 @@
 #!/usr/bin/python3
-"""Module returns info about a given employee ID"""
 
 import requests
-import sys
 import json
+import sys 
 
-url = "https://jsonplaceholder.typicode.com"
+url = 'https://jsonplaceholder.typicode.com'
+employee_id = sys.argv[1]
+response = requests.get(f'{url}/users?id={employee_id}')
 
-if __name__ == "__main__":
-    employee_id = sys.argv[1]
+data = response.json()
 
-    user_url = f'{url}/users?id={employee_id}'
+for item in data:
+    name = item.get('name')
 
-    response = requests.get(user_url)
-    data = response.text
-    data = json.loads(data)
-    name = data[0]['name']
 
-    todos_url = f'{url}/todos?userId={employee_id}'
-    todos_response = requests.get(todos_url)
-    tasks = todos_response.text
-    tasks = json.loads(tasks)
+tasks = requests.get(f'{url}/users/{employee_id}/todos')
+todos = tasks.json()
+my_list = []
+completed = 0
+total = 0
 
-    complete = 0
-    all_todos = len(tasks)
-    completed_tasks = []
+for item in todos:
+    total += 1
+    if item.get('completed') == True:
+        completed += 1;
 
-    for task in tasks:
-        if task.get('completed'):
-            complete += 1
-            completed_tasks.append(task)
-
-    print(f'Employee {name} is done with tasks {complete}/{all_todos}:')
-
-    for task in completed_tasks:
-        print(f'\t {task.get("title")}')
+print(f'Employee {name} is done with tasks {completed}/{total}')
