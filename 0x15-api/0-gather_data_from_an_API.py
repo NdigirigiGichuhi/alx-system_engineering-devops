@@ -26,3 +26,8 @@ for item in todos:
         completed += 1;
 
 print(f'Employee {name} is done with tasks {completed}/{total}')
+
+for item in todos:
+    total += 1
+    if item.get('completed') == True:
+        print('\t', item.get('title'))
