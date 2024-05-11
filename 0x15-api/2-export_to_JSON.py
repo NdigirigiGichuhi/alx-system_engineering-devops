@@ -26,11 +26,9 @@ if __name__ == '__main__':
             todo.pop('title')
             todo.pop('userId')
             todo.pop('id')
-        
 
         my_dict = {employee_id: todos}
 
         json_file = f'{employee_id}.json'
-
         with open(json_file, 'w') as file:
-            json.dump(my_dict, file)      
+            json.dump(my_dict, file)
