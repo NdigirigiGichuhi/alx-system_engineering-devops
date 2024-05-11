@@ -2,7 +2,7 @@
 
 import requests
 import json
-import sys 
+import sys
 
 url = 'https://jsonplaceholder.typicode.com'
 employee_id = sys.argv[1]
@@ -22,12 +22,11 @@ total = 0
 
 for item in todos:
     total += 1
-    if item.get('completed') == True:
-        completed += 1;
+    if item['completed']:
+        completed += 1
 
 print(f'Employee {name} is done with tasks {completed}/{total}')
 
 for item in todos:
-    total += 1
-    if item.get('completed') == True:
-        print('\t', item.get('title'))
+    if item['completed']:
+        print('\t', item['title'])
