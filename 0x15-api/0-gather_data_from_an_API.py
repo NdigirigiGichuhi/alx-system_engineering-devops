@@ -15,7 +15,6 @@ if len(sys.argv) == 2:
     for item in data:
         name = item.get('name')
 
-
     tasks = requests.get(f'{url}/users/{employee_id}/todos')
     todos = tasks.json()
     my_list = []
