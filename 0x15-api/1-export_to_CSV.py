@@ -20,13 +20,14 @@ if __name__ == '__main__':
 
         tasks = requests.get(f'{url}/users/{employee_id}/todos')
         todos = tasks.json()
-        
+
         csv_file = 'USER_ID.csv'
 
         main_list = []
-        
+
         for item in todos:
-            my_list = [str(item['userId']), name, str(item['completed']), item['title']]
+            my_list = [str(item['userId']), name,
+                       str(item['completed']), item['title']]
             main_list.append(my_list)
 
         with open(csv_file, 'w') as file:
