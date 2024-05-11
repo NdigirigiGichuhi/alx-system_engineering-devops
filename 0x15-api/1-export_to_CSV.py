@@ -16,7 +16,7 @@ if __name__ == '__main__':
         data = response.json()
 
         for item in data:
-            name = item.get('name')
+            name = item.get('username')
 
         tasks = requests.get(f'{url}/users/{employee_id}/todos')
         todos = tasks.json()
