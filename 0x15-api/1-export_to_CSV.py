@@ -21,7 +21,7 @@ if __name__ == '__main__':
         tasks = requests.get(f'{url}/users/{employee_id}/todos')
         todos = tasks.json()
 
-        csv_file = 'USER_ID.csv'
+        csv_file = f'{employee_id}.csv'
 
         main_list = []
 
