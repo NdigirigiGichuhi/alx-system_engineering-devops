@@ -25,7 +25,7 @@ for item in todos:
     if item['completed']:
         completed += 1
 
-print(f'Employee {name} is done with tasks {completed}/{total}')
+print(f'Employee {name} is done with tasks {completed}/{total}:')
 
 for item in todos:
     if item['completed']:
