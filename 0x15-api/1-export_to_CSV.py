@@ -26,7 +26,7 @@ if __name__ == '__main__':
         main_list = []
         
         for item in todos:
-            my_list = [str(item['id']), name, str(item['completed']), item['title']]
+            my_list = [str(item['userId']), name, str(item['completed']), item['title']]
             main_list.append(my_list)
 
         with open(csv_file, 'w') as file:
