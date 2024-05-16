@@ -2,19 +2,25 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        root /var/www/html;
-
-        # Add index.php to the list if you are using PHP
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name 100.27.14.174;
+        server_name _;
+        rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        error_page 404 /custom_404.html;
+        index index.html index.htm;
+        error_page 404 /404.html;
+        add_header X-Served-By $hostname;
 
         location / {
-                # First attempt to serve request as file, then
-                # as directory, then fall back to displaying a 404.
+                root /var/www/html/;
                 try_files $uri $uri/ =404;
         }
 
-        location = /airbnb-onepage/ {
-                proxy_pass http://127.0.0.1:5000/airbnb-onepage;
+
+        location /airbnb-onepage/ {
+                proxy_pass http://localhost:5000;
         }
+
+        location = /404.html {
+                root /var/www/error/;
+                internal;
+        }
+}
